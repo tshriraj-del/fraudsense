@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Color system — classified intelligence terminal
+   ============================================================ */
+:root {
+  --bg-base: #080c10;
+  --bg-surface: #0d1117;
+  --bg-elevated: #161b22;
+  --border: #21262d;
+  --border-active: #30363d;
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-dim: #484f58;
+  --accent-cyan: #39d0d8;
+  --accent-cyan-dim: #1a4a4e;
+  --accent-red: #ff4444;
+  --accent-red-dim: #2d1515;
+  --accent-amber: #f0a400;
+  --accent-amber-dim: #2d2000;
+  --accent-green: #39d353;
+  --accent-green-dim: #0d2a13;
+  --accent-blue: #4493f8;
+  --accent-blue-dim: #0d2048;
+  --accent-purple: #d2a8ff;
+  --accent-purple-dim: #1e1233;
+}
+
+@layer base {
+  html {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  body {
+    margin: 0;
+    color: var(--text-primary);
+    background-color: var(--bg-base);
+    /* (1) grid pattern · (2) radial vignette lighter in center */
+    background-image:
+      linear-gradient(rgba(48, 54, 61, 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(48, 54, 61, 0.3) 1px, transparent 1px),
+      radial-gradient(120% 90% at 50% 40%, rgba(22, 27, 34, 0.55) 0%, rgba(8, 12, 16, 0) 55%, rgba(5, 7, 10, 0.85) 100%);
+    background-size: 40px 40px, 40px 40px, 100% 100%;
+    background-attachment: fixed;
+    background-position: center;
+  }
+
+  /* Focus rings — cyan, offset 3px */
+  :focus-visible {
+    outline: 1px solid var(--accent-cyan);
+    outline-offset: 3px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-base);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-active);
+    border-radius: 0;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3d444d;
+  }
+}
+
+@layer components {
+  /* Sharp-cornered panel surface */
+  .panel {
+    position: relative;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    background-color: var(--bg-surface);
+    transition: border-color 200ms ease;
+  }
+  .panel:hover {
+    border-color: var(--border-active);
+  }
+
+  /* Left-edge accent bar drawn via pseudo-element (scaleY animation) */
+  .edge {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    transform-origin: top;
+    content: '';
+  }
+
+  .panel-label {
+    font-family: 'Syne', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  /* Interactive elements use a crosshair cursor */
+  button,
+  a,
+  select,
+  textarea,
+  input,
+  label[role='button'],
+  [role='button'] {
+    cursor: crosshair;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Syne', sans-serif;
+  }
+  .font-mono {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  /* Skeleton shimmer */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--bg-elevated) 25%,
+      var(--border-active) 50%,
+      var(--bg-elevated) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+  }
+
+  /* Caret for the typewriter classification heading */
+  .caret::after {
+    content: '';
+    display: inline-block;
+    width: 0.5ch;
+    height: 1em;
+    margin-left: 2px;
+    background: var(--accent-cyan);
+    transform: translateY(0.12em);
+    animation: pulseDot 1s steps(1) infinite;
+  }
+}
