@@ -66,7 +66,7 @@ export default function InputSection({
                 type="button"
                 onClick={() => setCaseType(t)}
                 aria-pressed={active}
-                className="rounded-[2px] border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.06em] transition-all duration-150"
+                className="rounded-lg border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.06em] transition-all duration-150"
                 style={
                   active
                     ? {
@@ -97,7 +97,7 @@ export default function InputSection({
         value={caseText}
         onChange={(e) => setCaseText(e.target.value)}
         placeholder="Paste a case description, transaction details, or suspicious activity summary..."
-        className="min-h-[140px] w-full resize-y rounded-[2px] border border-[color:var(--border)] bg-[color:var(--bg-base)] px-4 py-3 font-mono text-[13px] leading-relaxed text-[color:var(--text-primary)] placeholder:text-[color:var(--text-dim)] transition focus:border-[color:var(--accent-cyan)] focus:outline-none focus:[box-shadow:0_0_0_3px_rgba(57,208,216,0.08)]"
+        className="min-h-[140px] w-full resize-y rounded-lg border border-[color:var(--border)] bg-[color:var(--bg-base)] px-4 py-3 font-mono text-[13px] leading-relaxed text-[color:var(--text-primary)] placeholder:text-[color:var(--text-dim)] transition focus:border-[color:var(--accent-cyan)] focus:outline-none focus:[box-shadow:0_0_0_3px_rgba(57,208,216,0.08)]"
       />
 
       <div className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.08em]">
@@ -140,7 +140,7 @@ export default function InputSection({
           }}
           onDragLeave={() => setDragOver(false)}
           onDrop={onDrop}
-          className="flex w-full flex-col items-center justify-center gap-1.5 rounded-[2px] border border-dashed py-5 transition-colors duration-150"
+          className="flex w-full flex-col items-center justify-center gap-1.5 rounded-lg border border-dashed py-5 transition-colors duration-150"
           style={{
             borderColor: dragOver ? 'var(--accent-cyan)' : 'var(--border-active)',
             background: dragOver ? 'var(--accent-cyan-dim)' : 'transparent',
@@ -160,7 +160,7 @@ export default function InputSection({
             {attachments.map((a) => (
               <li
                 key={a.id}
-                className="flex items-center gap-2 rounded-[2px] border border-[color:var(--border)] bg-[color:var(--bg-base)] px-2.5 py-1.5"
+                className="flex items-center gap-2 rounded-lg border border-[color:var(--border)] bg-[color:var(--bg-base)] px-2.5 py-1.5"
               >
                 {a.kind === 'image' ? (
                   <ImageIcon className="h-4 w-4 shrink-0 text-[color:var(--accent-purple)]" />
@@ -201,7 +201,7 @@ export default function InputSection({
                 type="button"
                 onClick={() => toggleFlag(flag)}
                 aria-pressed={active}
-                className="rounded-[2px] border px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.04em] transition-all duration-150"
+                className="rounded-lg border px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.04em] transition-all duration-150"
                 style={
                   active
                     ? {
@@ -229,7 +229,7 @@ export default function InputSection({
         type="button"
         onClick={onInvestigate}
         disabled={!canSubmit}
-        className={`mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-[2px] border font-display text-[13px] uppercase tracking-[0.1em] transition-all duration-150 disabled:opacity-40 ${
+        className={`mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-lg border font-display text-[13px] uppercase tracking-[0.1em] transition-all duration-150 disabled:opacity-40 ${
           loading ? 'animate-border-pulse' : ''
         }`}
         style={{
@@ -275,7 +275,7 @@ export default function InputSection({
               type="button"
               onClick={() => applyExample(ex)}
               title={ex.label}
-              className="rounded-[2px] border border-dashed border-[color:var(--border-active)] bg-transparent px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.06em] text-[color:var(--text-secondary)] transition-all duration-150 hover:border-solid hover:bg-[color:var(--bg-elevated)] hover:text-[color:var(--text-primary)]"
+              className="rounded-lg border border-dashed border-[color:var(--border-active)] bg-transparent px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.06em] text-[color:var(--text-secondary)] transition-all duration-150 hover:border-solid hover:bg-[color:var(--bg-elevated)] hover:text-[color:var(--text-primary)]"
             >
               Case {String.fromCharCode(65 + i)}
             </button>

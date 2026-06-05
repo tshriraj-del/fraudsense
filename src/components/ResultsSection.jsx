@@ -56,7 +56,7 @@ export default function ResultsSection({ analysis, caseMeta, onReset }) {
         <button
           type="button"
           onClick={copyReport}
-          className="rounded-[2px] border border-dashed px-4 py-2 font-mono text-[11px] uppercase tracking-[0.1em] transition-all duration-150"
+          className="rounded-lg border border-dashed px-4 py-2 font-mono text-[11px] uppercase tracking-[0.1em] transition-all duration-150"
           style={{
             borderColor: flash ? 'var(--accent-cyan)' : 'var(--border-active)',
             color: flash ? 'var(--accent-cyan)' : 'var(--text-secondary)',
@@ -67,7 +67,7 @@ export default function ResultsSection({ analysis, caseMeta, onReset }) {
         <button
           type="button"
           onClick={onReset}
-          className="rounded-[2px] border border-dashed border-[color:var(--border-active)] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.1em] text-[color:var(--text-secondary)] transition-colors duration-150 hover:text-[color:var(--text-primary)]"
+          className="rounded-lg border border-dashed border-[color:var(--border-active)] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.1em] text-[color:var(--text-secondary)] transition-colors duration-150 hover:text-[color:var(--text-primary)]"
         >
           New Case
         </button>

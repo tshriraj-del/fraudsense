@@ -55,7 +55,7 @@ export default function ClassificationPanel({ classification = {}, order = 4 }) 
       </h2>
 
       {secondary_type && (
-        <span className="mt-2 inline-block rounded-[2px] border border-[color:var(--border-active)] bg-[color:var(--bg-elevated)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-[color:var(--text-secondary)]">
+        <span className="mt-2 inline-block rounded-lg border border-[color:var(--border-active)] bg-[color:var(--bg-elevated)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-[color:var(--text-secondary)]">
           + {secondary_type}
         </span>
       )}

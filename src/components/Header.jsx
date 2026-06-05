@@ -1,45 +1,71 @@
-import { FingerprintIcon } from './Icons.jsx';
+import { ShieldCheck } from 'lucide-react';
 
-// status: 'ready' | 'analyzing' | 'complete' — derived from existing app state.
 const STATUS = {
-  ready: { dot: 'var(--accent-green)', label: 'SYSTEM READY' },
-  analyzing: { dot: 'var(--accent-amber)', label: 'ANALYZING...' },
-  complete: { dot: 'var(--accent-cyan)', label: 'INVESTIGATION COMPLETE' },
+  ready:     { color: 'var(--accent-green)',  label: 'Ready' },
+  analyzing: { color: 'var(--accent-amber)',  label: 'Analyzing…' },
+  complete:  { color: 'var(--accent-cyan)',   label: 'Complete' },
 };
 
 export default function Header({ status = 'ready' }) {
   const s = STATUS[status] ?? STATUS.ready;
 
   return (
-    <header className="sticky top-0 z-30 h-14 border-b border-[color:var(--border)] bg-[color:var(--bg-surface)]/95 backdrop-blur-sm">
-      <div className="mx-auto flex h-full max-w-[1100px] items-center justify-between px-4 sm:px-6">
-        {/* Left: fingerprint + wordmark */}
-        <div className="flex items-center gap-3">
-          <span className="relative flex h-7 w-7 items-center justify-center overflow-hidden text-[color:var(--accent-cyan)]">
-            <FingerprintIcon className="h-6 w-6" />
-            {/* horizontal scan line sweeping every 3s */}
-            <span className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-[color:var(--accent-cyan)] shadow-[0_0_6px_var(--accent-cyan)] animate-icon-scan" />
-          </span>
-          <span className="font-display text-sm font-bold tracking-[0.15em] text-[color:var(--text-primary)]">
-            FRAUDSENSE
-          </span>
+    <header style={{
+      borderBottom: '1px solid var(--border)',
+      background: 'rgba(8,11,20,0.95)',
+      backdropFilter: 'blur(16px)',
+      WebkitBackdropFilter: 'blur(16px)',
+      position: 'sticky', top: 0, zIndex: 50,
+    }}>
+      <div style={{
+        maxWidth: 1100, margin: '0 auto',
+        padding: '12px 24px',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      }}>
+        {/* Left: icon + wordmark */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{
+            width: 36, height: 36,
+            background: 'rgba(56,189,248,0.1)',
+            border: '1px solid rgba(56,189,248,0.3)',
+            borderRadius: 9,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            flexShrink: 0,
+          }}>
+            <ShieldCheck size={17} color="#38bdf8" />
+          </div>
+          <div>
+            <div style={{ fontSize: 16, fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
+              FraudSense
+            </div>
+            <div style={{ fontSize: 11, color: 'var(--text-secondary)' }}>
+              AI fraud investigation copilot · 4-stage pipeline
+            </div>
+          </div>
         </div>
 
-        {/* Center: status indicator (hidden on mobile) */}
-        <div className="hidden items-center gap-2 md:flex">
-          <span
-            className="h-1.5 w-1.5 rounded-full animate-pulse-dot"
-            style={{ backgroundColor: s.dot, boxShadow: `0 0 8px ${s.dot}` }}
-          />
-          <span className="font-mono text-[11px] tracking-[0.1em] text-[color:var(--text-secondary)]">
-            {s.label}
-          </span>
+        {/* Right: status + badge */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <div style={{
+              width: 7, height: 7, borderRadius: '50%',
+              background: s.color,
+              boxShadow: `0 0 6px ${s.color}`,
+              animation: status === 'analyzing' ? 'pulseDot 1s steps(1) infinite' : 'none',
+            }} />
+            <span style={{ fontSize: 11, color: 'var(--text-secondary)', fontWeight: 500 }}>
+              {s.label}
+            </span>
+          </div>
+          <div style={{
+            background: 'rgba(56,189,248,0.08)',
+            border: '1px solid rgba(56,189,248,0.2)',
+            borderRadius: 6, padding: '4px 10px',
+            fontSize: 11, color: '#38bdf8', fontWeight: 500,
+          }}>
+            REDWING · Investigation
+          </div>
         </div>
-
-        {/* Right: powered-by pill */}
-        <span className="rounded-[2px] border border-[color:var(--border)] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.1em] text-[color:var(--text-dim)]">
-          Powered by Claude
-        </span>
       </div>
     </header>
   );

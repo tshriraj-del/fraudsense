@@ -16,7 +16,7 @@ export default function LossEstimatePanel({ lossEstimate = {}, order = 2 }) {
       </h3>
 
       <div className="grid grid-cols-2 gap-3">
-        <div className="rounded-[2px] border border-[color:var(--border)] bg-[color:var(--bg-base)] p-3">
+        <div className="rounded-lg border border-[color:var(--border)] bg-[color:var(--bg-base)] p-3">
           <div className="font-mono text-[10px] uppercase tracking-[0.1em] text-[color:var(--text-dim)]">
             Confirmed
           </div>
@@ -24,7 +24,7 @@ export default function LossEstimatePanel({ lossEstimate = {}, order = 2 }) {
             {confirmed ?? '—'}
           </div>
         </div>
-        <div className="rounded-[2px] border border-[color:var(--accent-amber)]/40 bg-[color:var(--accent-amber-dim)] p-3">
+        <div className="rounded-lg border border-[color:var(--accent-amber)]/40 bg-[color:var(--accent-amber-dim)] p-3">
           <div className="font-mono text-[10px] uppercase tracking-[0.1em] text-[color:var(--text-dim)]">
             Likely exposure
           </div>

@@ -45,7 +45,7 @@ export default function RiskScorePanel({ riskScore = {}, order = 1 }) {
       <div className="flex items-start justify-between">
         <h3 className="panel-label text-[12px] text-[color:var(--text-secondary)]">Risk Score</h3>
         <span
-          className="rounded-[2px] px-2 py-0.5 font-display text-[11px] uppercase tracking-[0.12em]"
+          className="rounded-lg px-2 py-0.5 font-display text-[11px] uppercase tracking-[0.12em]"
           style={{ color: style.color, background: style.dim, border: `1px solid ${style.color}` }}
         >
           {severity}

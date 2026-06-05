@@ -44,7 +44,7 @@ export default function RecommendationPanel({ recommendation = {}, order = 7 }) 
       )}
 
       {decision_logic.length > 0 && (
-        <div className="mx-auto mt-6 max-w-[560px] rounded-[2px] border border-[color:var(--border)] bg-[color:var(--bg-base)] p-4">
+        <div className="mx-auto mt-6 max-w-[560px] rounded-lg border border-[color:var(--border)] bg-[color:var(--bg-base)] p-4">
           <div className="font-display mb-2 text-[10px] uppercase tracking-[0.12em] text-[color:var(--text-dim)]">
             Decision Logic
           </div>
@@ -94,7 +94,7 @@ export default function RecommendationPanel({ recommendation = {}, order = 7 }) 
       )}
 
       {escalation_path && (
-        <div className="mx-auto mt-6 max-w-[560px] rounded-[2px] border border-dashed border-[color:var(--border-active)] bg-[color:var(--bg-elevated)] p-4">
+        <div className="mx-auto mt-6 max-w-[560px] rounded-lg border border-dashed border-[color:var(--border-active)] bg-[color:var(--bg-elevated)] p-4">
           <div className="font-display mb-1.5 text-[10px] uppercase tracking-[0.12em] text-[color:var(--text-dim)]">
             ↗ Escalation Path
           </div>

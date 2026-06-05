@@ -16,7 +16,7 @@ export default function SignalsPanel({ signals = [], order = 3 }) {
           Signals Detected
         </h3>
         <span
-          className="rounded-[2px] px-2 py-0.5 font-mono text-[12px] font-medium"
+          className="rounded-lg px-2 py-0.5 font-mono text-[12px] font-medium"
           style={{
             color: 'var(--accent-cyan)',
             background: 'var(--accent-cyan-dim)',
@@ -43,7 +43,7 @@ export default function SignalsPanel({ signals = [], order = 3 }) {
             return (
               <li
                 key={i}
-                className="group relative flex items-start gap-3 rounded-[2px] px-2 py-2.5 transition-colors duration-150 hover:bg-[color:var(--bg-elevated)]"
+                className="group relative flex items-start gap-3 rounded-lg px-2 py-2.5 transition-colors duration-150 hover:bg-[color:var(--bg-elevated)]"
                 style={{ animation: 'fadeUp 0.3s ease-out both', animationDelay: `${500 + i * 50}ms` }}
               >
                 {/* hover left edge */}
@@ -55,14 +55,14 @@ export default function SignalsPanel({ signals = [], order = 3 }) {
                       {s.name}
                     </span>
                     <span
-                      className="rounded-[2px] px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em]"
+                      className="rounded-lg px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em]"
                       style={{ color: cat.color, background: cat.dim, border: `1px solid ${cat.color}55` }}
                     >
                       {s.category}
                     </span>
                     {basis && (
                       <span
-                        className="rounded-[2px] px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em]"
+                        className="rounded-lg px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em]"
                         style={{ color: basis.color, background: basis.dim, border: `1px solid ${basis.color}55` }}
                         title={s.basis === 'Observed' ? 'Stated in the case material' : 'Analyst inference'}
                       >

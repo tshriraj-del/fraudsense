@@ -3,7 +3,7 @@ import Header from './components/Header.jsx';
 import InputSection from './components/InputSection.jsx';
 import ResultsSection from './components/ResultsSection.jsx';
 import SkeletonLoader from './components/SkeletonLoader.jsx';
-import { AlertIcon, SearchIcon, CircuitTexture } from './components/Icons.jsx';
+import { AlertIcon, SearchIcon } from './components/Icons.jsx';
 import { investigateCase } from './api.js';
 import { processFile, MAX_FILES } from './files.js';
 import { CASE_TYPES, MIN_INPUT_LENGTH } from './constants.js';
@@ -101,11 +101,6 @@ export default function App() {
 
   return (
     <div className="relative min-h-full">
-      {/* Faint circuit texture, top-right corner */}
-      <div className="pointer-events-none fixed right-0 top-0 z-0 opacity-[0.03]" aria-hidden="true">
-        <CircuitTexture />
-      </div>
-
       <Header status={status} />
 
       <main className="relative z-10 mx-auto max-w-[1100px] px-4 py-8 sm:px-6 sm:py-10">
@@ -127,7 +122,7 @@ export default function App() {
         {error && !loading && (
           <div
             role="alert"
-            className="mx-auto mt-6 flex max-w-[720px] items-start gap-3 rounded-[2px] border px-4 py-3.5 font-mono text-[12px]"
+            className="mx-auto mt-6 flex max-w-[720px] items-start gap-3 rounded-lg border px-4 py-3.5 font-mono text-[12px]"
             style={{ borderColor: 'var(--accent-red)', background: 'var(--accent-red-dim)', color: 'var(--text-primary)' }}
           >
             <AlertIcon className="mt-0.5 h-5 w-5 shrink-0" />
@@ -140,7 +135,7 @@ export default function App() {
             <button
               type="button"
               onClick={runInvestigation}
-              className="shrink-0 rounded-[2px] border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors"
+              className="shrink-0 rounded-lg border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors"
               style={{ borderColor: 'var(--accent-red)', color: 'var(--accent-red)' }}
             >
               Retry
@@ -159,8 +154,8 @@ export default function App() {
         </div>
       </main>
 
-      <footer className="relative z-10 mx-auto max-w-[1100px] px-4 py-8 text-center font-mono text-[10px] uppercase tracking-[0.12em] text-[color:var(--text-dim)] sm:px-6">
-        FraudSense 2.0 · Internal fraud triage tooling · Powered by Claude
+      <footer className="relative z-10 mx-auto max-w-[1100px] px-4 py-8 text-center text-[11px] text-[color:var(--text-dim)] sm:px-6">
+        FraudSense · REDWING AI Fraud Detection Platform
       </footer>
     </div>
   );
@@ -168,8 +163,8 @@ export default function App() {
 
 function EmptyState() {
   return (
-    <div className="mx-auto max-w-[720px] rounded-[2px] border border-dashed border-[color:var(--border-active)] bg-[color:var(--bg-surface)]/40 px-6 py-14 text-center">
-      <span className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-[2px] border border-[color:var(--border)] bg-[color:var(--bg-base)] text-[color:var(--accent-cyan)]">
+    <div className="mx-auto max-w-[720px] rounded-lg border border-dashed border-[color:var(--border-active)] bg-[color:var(--bg-surface)]/40 px-6 py-14 text-center">
+      <span className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-[color:var(--border)] bg-[color:var(--bg-base)] text-[color:var(--accent-cyan)]">
         <SearchIcon className="h-6 w-6" />
       </span>
       <h3 className="font-display text-sm font-bold uppercase tracking-[0.12em] text-[color:var(--text-primary)]">

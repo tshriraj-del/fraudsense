@@ -1,7 +1,7 @@
 // Skeleton placeholders for all four panels while the API call is in flight.
 
 function Bar({ w = 'w-full', h = 'h-3', extra = '' }) {
-  return <div className={`skeleton rounded-[2px] ${h} ${w} ${extra}`} />;
+  return <div className={`skeleton rounded-lg ${h} ${w} ${extra}`} />;
 }
 
 function PanelShell({ children }) {
