@@ -1,5 +1,7 @@
-// FraudSense — Anthropic API client for the 4-stage investigation.
-// The key is read from the environment at build time; never hardcode it.
+// FraudSense — provider-agnostic LLM API client for the 4-stage investigation.
+// For Anthropic: supports native image/PDF vision blocks.
+// For other providers: text-only (image/PDF content is dropped, text files still work).
+import { callLLM, LLM_PROVIDER } from './llm-provider.js';
 
 // Spec requested 'claude-sonnet-4-20250514', but that snapshot returns
 // not_found_error on this account. 'claude-sonnet-4-6' is the current Sonnet 4
@@ -129,60 +131,58 @@ Requirements:
 }
 
 export async function investigateCase(caseText, caseType, contextFlags, attachments = []) {
-  const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY;
+  const promptText = buildPrompt(caseText, caseType, contextFlags, attachments);
 
-  if (!apiKey) {
-    throw new Error(
-      'VITE_ANTHROPIC_API_KEY is not set. Create a .env file with VITE_ANTHROPIC_API_KEY=your_key_here and restart the dev server.'
-    );
-  }
+  // Anthropic: send native vision/document blocks for image and PDF attachments.
+  // Other providers: text-only (image/PDF blocks not supported — text files still work).
+  if (LLM_PROVIDER === 'anthropic') {
+    const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY;
+    if (!apiKey) throw new Error('VITE_ANTHROPIC_API_KEY is not set in .env');
 
-  // Native vision / document content blocks for image and PDF attachments.
-  const mediaBlocks = attachments
-    .filter((a) => a.kind === 'image' || a.kind === 'document')
-    .map((a) =>
-      a.kind === 'image'
-        ? { type: 'image', source: { type: 'base64', media_type: a.mediaType, data: a.data } }
-        : { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: a.data } }
-    );
+    const mediaBlocks = attachments
+      .filter((a) => a.kind === 'image' || a.kind === 'document')
+      .map((a) =>
+        a.kind === 'image'
+          ? { type: 'image', source: { type: 'base64', media_type: a.mediaType, data: a.data } }
+          : { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: a.data } }
+      );
 
-  const content = [
-    ...mediaBlocks,
-    { type: 'text', text: buildPrompt(caseText, caseType, contextFlags, attachments) },
-  ];
+    const content = [...mediaBlocks, { type: 'text', text: promptText }];
 
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true',
-    },
-    body: JSON.stringify({
-      model: MODEL,
-      max_tokens: MAX_TOKENS,
-      system: SYSTEM_PROMPT,
-      messages: [{ role: 'user', content }],
-    }),
-  });
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        max_tokens: MAX_TOKENS,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: 'user', content }],
+      }),
+    });
 
-  if (!response.ok) {
-    let message = `API request failed (${response.status})`;
-    try {
-      const err = await response.json();
-      if (err.error?.message) message = err.error.message;
-    } catch {
-      /* ignore parse error */
+    if (!response.ok) {
+      let message = `API request failed (${response.status})`;
+      try { const err = await response.json(); if (err.error?.message) message = err.error.message; } catch {}
+      throw new Error(message);
     }
-    throw new Error(message);
+
+    const data = await response.json();
+    const text = data.content?.[0]?.text?.trim();
+    if (!text) throw new Error('Empty response from the API.');
+    return parseAnalysis(text);
   }
 
-  const data = await response.json();
-  const text = data.content?.[0]?.text?.trim();
-
-  if (!text) throw new Error('Empty response from the API.');
-
+  // Non-Anthropic providers — text only via proxy
+  const text = await callLLM({
+    systemPrompt: SYSTEM_PROMPT,
+    messages: [{ role: 'user', content: promptText }],
+    maxTokens: MAX_TOKENS,
+  });
   return parseAnalysis(text);
 }
 
