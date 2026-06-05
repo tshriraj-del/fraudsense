@@ -3,7 +3,6 @@
 > Part of the **[REDWING](https://github.com/tshriraj-del/redwing-fraud-os)** AI Fraud Detection Platform
 
 ![REDWING](https://img.shields.io/badge/REDWING-AI%20Fraud%20Platform-818cf8?style=for-the-badge)
-![Model](https://img.shields.io/badge/Claude-Sonnet%204.6-0ea5e9?style=for-the-badge)
 ![Stack](https://img.shields.io/badge/Stack-React%20%7C%20Vite%20%7C%20Tailwind-38bdf8?style=for-the-badge)
 
 ---
@@ -54,7 +53,7 @@ git clone https://github.com/tshriraj-del/fraudsense
 cd fraudsense
 npm install
 
-# Add your Anthropic API key
+# Add your LLM API key
 echo "VITE_ANTHROPIC_API_KEY=your_key_here" > .env
 
 npm run dev
@@ -70,7 +69,7 @@ FraudSense is the **investigation layer**. When a transaction is escalated by th
 | System | Role |
 |---|---|
 | **ML Detection Lab** | Scores every transaction (AUC 0.979, 23 features) |
-| **Rule Factory** | Self-improving rule engine powered by Claude |
+| **Rule Factory** | Self-improving rule engine |
 | **SyntheticID Lab** | Adversarial attack simulator + Rule Factory training feed |
 | **Network Intelligence** | Real-time fraud ring detection via graph analysis |
 | **FraudSense** | ← Investigation copilot for escalated cases |
@@ -82,7 +81,7 @@ FraudSense is the **investigation layer**. When a transaction is escalated by th
 
 ## Stack
 
-React 18 · Vite · Tailwind CSS · Claude Sonnet 4.6 · Anthropic API
+React 18 · Vite · Tailwind CSS · LLM API
 
 ---
 
